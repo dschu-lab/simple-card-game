@@ -13,8 +13,8 @@ type TextAlign =
 const fontWeightMap = {
   h1: 900,
   h2: 900,
-  h3: 100,
-  h4: 100,
+  h3: 600,
+  h4: 600,
   h5: 100,
 };
 
@@ -25,7 +25,7 @@ interface HeadingProps {
 }
 
 const StyledHeading = styled.h1<HeadingProps>`
-  margin: 0 0 1.25em 0;
+  margin: 0 0 1em 0;
   font-weight: ${({ theme, as }) => (as ? fontWeightMap[as] : undefined)};
   white-space: pre-line;
   text-align: ${({ textAlign = "left" }) => textAlign};

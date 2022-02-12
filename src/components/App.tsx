@@ -9,6 +9,8 @@ import { ErrorMessageDisplay } from "./ErrorMessageDisplay";
 import { theme } from "../style/theme";
 import { GlobalStyle } from "./GlobalStyle";
 import { Heading } from "./layout/Heading";
+import { ToastMessageContextProvider } from "../contexts/ToastMessageContext";
+import { ToastMessageDisplay } from "./ToastMessageDisplay";
 
 const AnimatedLoadingOverlay = styled(animated.div)`
   display: flex;
@@ -56,14 +58,17 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <AppContextProvider>
-        <ErrorMessageDisplay />
-        <AppShell>
-          <Details />
-          <Controls />
-          <Overview />
-        </AppShell>
-      </AppContextProvider>
+      <ToastMessageContextProvider>
+        <AppContextProvider>
+          <ToastMessageDisplay />
+          <ErrorMessageDisplay />
+          <AppShell>
+            <Details />
+            <Controls />
+            <Overview />
+          </AppShell>
+        </AppContextProvider>
+      </ToastMessageContextProvider>
     </ThemeProvider>
   );
 };

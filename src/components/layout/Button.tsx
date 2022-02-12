@@ -3,7 +3,7 @@ import styled, { DefaultTheme, useTheme } from "styled-components";
 
 interface StyledButtonProps {
   isActive?: boolean;
-  swatch?: SwatchKeys;
+  swatch?: SwatchKey;
 }
 const StyledButton = styled(animated.button)<StyledButtonProps>`
   position: relative;

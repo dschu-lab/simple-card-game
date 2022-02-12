@@ -12,14 +12,14 @@ declare global {
     dream: ISwatch;
     ice: ISwatch;
   }
-  type SwatchKeys = keyof Swatches;
+  type SwatchKey = keyof Swatches;
 
   interface SizeValue {
     small: string;
     medium: string;
     large: string;
   }
-  type SizeValueKeys = "none" | keyof SizeValue;
+  type SizeValueKey = "none" | keyof SizeValue;
 }
 
 declare module "styled-components" {
@@ -30,6 +30,12 @@ declare module "styled-components" {
     spacing: SizeValue;
     border: {
       radius: SizeValue;
+    };
+    layer: {
+      base: number;
+      navigation: number;
+      super: number;
+      overlay: number;
     };
   }
 }

@@ -1,8 +1,9 @@
 import { plainToInstance } from "class-transformer";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Card } from "../models/Card";
 import { ApiClient } from "../network/ApiClient";
 import { RequestState, defaultRequestState } from "../models/RequestState";
+import { ToastMessageContext } from "../contexts/ToastMessageContext";
 
 export const useApi = ({
   selectedCardId,
@@ -18,6 +19,8 @@ export const useApi = ({
     useState<RequestState>(defaultRequestState);
   const [updatingState, setUpdatingState] =
     useState<RequestState>(defaultRequestState);
+
+  const { addMessage } = useContext(ToastMessageContext);
 
   const submitSelectedCard = async () => {
     if (updatingState.isActive) {
@@ -39,17 +42,24 @@ export const useApi = ({
           hasErrored: false,
           errorMessage: "",
         });
+
+        // Create toast notification
+        addMessage("Good work", "Player card has been updated!", "success");
       } catch (e) {
         let errorMessage = "";
         if (e instanceof Error) {
           errorMessage = e.message;
         }
 
+        // Update the flags
         setUpdatingState({
           isActive: false,
           hasErrored: true,
           errorMessage,
         });
+
+        // Create toast notification
+        addMessage("Uh oh", errorMessage, "error");
       }
     }
   };

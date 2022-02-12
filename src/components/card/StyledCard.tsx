@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { swatchGradient } from "../../style/theme";
 
 interface StyledOverviewCardProps {
-  $swatch?: SwatchKeys;
+  $swatch?: SwatchKey;
 }
 
 export const StyledCard = styled(animated.div)<StyledOverviewCardProps>`
