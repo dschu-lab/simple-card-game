@@ -11,7 +11,7 @@ export type SortOrder = "none" | "asc" | "desc";
 /**
  * App context interface
  */
-interface AppContextState {
+export interface AppContextState {
   cards: Card[];
   order: SortOrder;
   setOrder: (order: SortOrder) => void;
