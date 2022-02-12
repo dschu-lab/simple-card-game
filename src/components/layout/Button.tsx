@@ -6,6 +6,8 @@ interface StyledButtonProps {
   swatch?: SwatchKeys;
 }
 const StyledButton = styled(animated.button)<StyledButtonProps>`
+  position: relative;
+  overflow: hidden;
   border: 0 none;
   border-radius: 18px;
   padding: 10px;
@@ -13,6 +15,7 @@ const StyledButton = styled(animated.button)<StyledButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 40px;
   gap: ${({ theme }) => theme.spacing.medium};
 
   &:not([disabled]) {

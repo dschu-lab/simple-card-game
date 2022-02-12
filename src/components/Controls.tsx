@@ -5,15 +5,30 @@ import {
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { animated, useTransition } from "@react-spring/web";
 import { useContext } from "react";
 import styled from "styled-components";
 import { AppContext, SortOrder } from "../contexts/AppContext";
 import { Button } from "./layout/Button";
 import { Heading } from "./layout/Heading";
 
+const ButtonContentShell = styled(animated.div)`
+  height: 40px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  gap: ${({ theme }) => theme.spacing.medium};
+`;
+
 const SubmitButton = () => {
   const { selectedCardId, submitSelectedCard, requests } =
     useContext(AppContext);
+
+  const transitions = useTransition(!requests.updating.isActive, {
+    from: { translateY: -100 },
+    enter: { translateY: 0 },
+    leave: { translateY: -100 },
+  });
 
   return (
     <Button
@@ -22,8 +37,27 @@ const SubmitButton = () => {
       style={{ gridColumn: "1 / span 2" }}
       isActive
     >
-      {!requests.updating.isActive && <FontAwesomeIcon icon={faCloudArrowUp} />}
-      <span>{requests.updating.isActive ? "Submitting" : "Submit"}</span>
+      {transitions(({ translateY }, item) => {
+        return item ? (
+          <ButtonContentShell
+            style={{
+              transform: translateY.to((y) => `translateY(${y}%)`),
+            }}
+          >
+            <FontAwesomeIcon icon={faCloudArrowUp} /> {"Submit"}
+          </ButtonContentShell>
+        ) : (
+          <ButtonContentShell
+            style={{
+              transform: translateY
+                .to({ range: [-100.0, 0.0], output: [100, 0] })
+                .to((y) => `translateY(${y}%)`),
+            }}
+          >
+            <span>{"Submitting"}</span>
+          </ButtonContentShell>
+        );
+      })}
     </Button>
   );
 };
