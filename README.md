@@ -5,8 +5,8 @@
     <a href="https://github.com/dschu-lab/simple-card-game/actions/workflows/pr-check.yml">
       <img src="https://github.com/dschu-lab/simple-card-game/actions/workflows/pr-check.yml/badge.svg" />
     </a>
-    <a href="https://github.com/diegomura/react-pdf/blob/master/LICENSE">
-      <img src="https://img.shields.io/github/license/diegomura/react-pdf.svg" />
+    <a href="https://dschu-simple-card-game.surge.sh">
+      <img alt="Website" src="https://img.shields.io/website?url=https%3A%2F%2Fdschu-simple-card-game.surge.sh">
     </a>
     <a href="https://github.com/prettier/prettier">
       <img src="https://img.shields.io/badge/styled%20with-prettier-ff69b4" />
