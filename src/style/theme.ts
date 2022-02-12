@@ -34,4 +34,4 @@ export const theme: DefaultTheme = {
 };
 
 export const swatchGradient = (theme: DefaultTheme, swatch: SwatchKeys) =>
-  `linear-gradient(135deg, ${theme.swatches[swatch].light} 0%, ${theme.swatches[swatch].dark} 100%);`;
+  `linear-gradient(135deg, ${theme.swatches[swatch].light} 0%, ${theme.swatches[swatch].dark} 100%)`;
