@@ -1,3 +1,10 @@
+import {
+  faArrowDownAZ,
+  faArrowDownZA,
+  faCloudArrowUp,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import styled from "styled-components";
 import { AppContext, SortOrder } from "../contexts/AppContext";
@@ -15,18 +22,20 @@ const SubmitButton = () => {
       style={{ gridColumn: "1 / span 2" }}
       isActive
     >
-      {"Submit"}
+      {!requests.updating.isActive && <FontAwesomeIcon icon={faCloudArrowUp} />}
+      <span>{requests.updating.isActive ? "Submitting" : "Submit"}</span>
     </Button>
   );
 };
 
 interface SortButtonData {
   order: SortOrder;
-  buttonText: string;
+  text: string;
+  icon: IconDefinition;
 }
 const buttonsData: SortButtonData[] = [
-  { order: "asc", buttonText: "Sort Ascending" },
-  { order: "desc", buttonText: "Sort Descending" },
+  { order: "asc", text: "Sort Ascending", icon: faArrowDownAZ },
+  { order: "desc", text: "Sort Descending", icon: faArrowDownZA },
 ];
 
 const SortButtons = () => {
@@ -34,12 +43,16 @@ const SortButtons = () => {
 
   return (
     <>
-      {buttonsData.map((data) => (
+      {buttonsData.map((button) => (
         <Button
-          isActive={order === data.order}
-          onClick={() => setOrder(order === data.order ? "none" : data.order)}
-          children={data.buttonText}
-        />
+          isActive={order === button.order}
+          onClick={() =>
+            setOrder(order === button.order ? "none" : button.order)
+          }
+        >
+          <FontAwesomeIcon icon={button.icon} />
+          <span>{button.text}</span>
+        </Button>
       ))}
     </>
   );
