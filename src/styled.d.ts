@@ -24,6 +24,8 @@ declare global {
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    primary: string;
+    inverted: string;
     swatches: Swatches;
     spacing: SizeValue;
     border: {
