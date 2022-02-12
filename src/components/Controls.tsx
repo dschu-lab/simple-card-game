@@ -45,6 +45,7 @@ const SortButtons = () => {
     <>
       {buttonsData.map((button) => (
         <Button
+          key={button.order}
           isActive={order === button.order}
           onClick={() =>
             setOrder(order === button.order ? "none" : button.order)
