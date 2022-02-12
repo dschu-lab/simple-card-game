@@ -1,7 +1,9 @@
+import { useSpring } from "@react-spring/web";
 import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { AppContext } from "../contexts/AppContext";
 import { Card } from "../models/Card";
+import { swatchGradient } from "../style/theme";
 import { sortByRealName } from "../utils/sortByRealName";
 import { CardInner } from "./card/CardInner";
 import { StyledInteractiveCard } from "./card/StyledCard";
@@ -12,11 +14,16 @@ const OverviewCard = ({ card }: { card: Card }) => {
   const isSelected = selectedCardId === card.id;
   const handleClick = () => setSelectedCardId(!isSelected ? card.id : null);
 
+  const theme = useTheme();
+
+  const styles = useSpring({
+    background: isSelected
+      ? swatchGradient(theme, "yellow")
+      : swatchGradient(theme, "dream"),
+  });
+
   return (
-    <StyledInteractiveCard
-      onClick={handleClick}
-      swatch={isSelected ? "yellow" : "dream"}
-    >
+    <StyledInteractiveCard onClick={handleClick} $swatch="dream" style={styles}>
       <CardInner card={card} />
     </StyledInteractiveCard>
   );
