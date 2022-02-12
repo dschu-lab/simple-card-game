@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { AppContext } from "../contexts/AppContext";
+import { AppContext, SortOrder } from "../contexts/AppContext";
 import { Button } from "./layout/Button";
 import { Heading } from "./layout/Heading";
 
@@ -20,23 +20,27 @@ const SubmitButton = () => {
   );
 };
 
+interface SortButtonData {
+  order: SortOrder;
+  buttonText: string;
+}
+const buttonsData: SortButtonData[] = [
+  { order: "asc", buttonText: "Sort Ascending" },
+  { order: "desc", buttonText: "Sort Descending" },
+];
+
 const SortButtons = () => {
   const { order, setOrder } = useContext(AppContext);
 
   return (
     <>
-      <Button
-        isActive={order === "asc"}
-        onClick={() => setOrder(order === "asc" ? "none" : "asc")}
-      >
-        {"Sort Asc"}
-      </Button>
-      <Button
-        isActive={order === "desc"}
-        onClick={() => setOrder(order === "desc" ? "none" : "desc")}
-      >
-        {"Sort Desc"}
-      </Button>
+      {buttonsData.map((data) => (
+        <Button
+          isActive={order === data.order}
+          onClick={() => setOrder(order === data.order ? "none" : data.order)}
+          children={data.buttonText}
+        />
+      ))}
     </>
   );
 };
