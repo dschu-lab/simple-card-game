@@ -2,7 +2,7 @@ import { plainToInstance } from "class-transformer";
 import React, { createContext, useState } from "react";
 import { ToastMessageType, ToastMessage } from "../models/ToastMessage";
 
-interface ToastMessageContextState {
+export interface ToastMessageContextState {
   messages: ToastMessage[];
   addMessage: (
     title: string,
