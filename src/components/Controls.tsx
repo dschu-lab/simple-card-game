@@ -10,7 +10,6 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { AppContext, SortOrder } from "../contexts/AppContext";
 import { Button } from "./layout/Button";
-import { Heading } from "./layout/Heading";
 
 const ButtonContentShell = styled(animated.div)`
   height: 40px;
@@ -96,7 +95,6 @@ const SortButtons = () => {
 export const Controls = () => {
   return (
     <ControlsShell>
-      <Heading>{"Controls"}</Heading>
       <ButtonShell>
         <SortButtons />
         <SubmitButton />

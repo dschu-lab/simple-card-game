@@ -7,7 +7,6 @@ import { swatchGradient } from "../style/theme";
 import { sortByRealName } from "../utils/sortByRealName";
 import { CardInner } from "./card/CardInner";
 import { StyledInteractiveCard } from "./card/StyledCard";
-import { Heading } from "./layout/Heading";
 
 const OverviewCard = ({ card }: { card: Card }) => {
   const { selectedCardId, setSelectedCardId } = useContext(AppContext);
@@ -43,7 +42,6 @@ export const Overview = () => {
 
   return (
     <OverviewShell>
-      <Heading>{"Overview"}</Heading>
       <OverviewCardsShell>
         {sortedCards.map((card) => (
           <OverviewCard key={card.id} card={card} />

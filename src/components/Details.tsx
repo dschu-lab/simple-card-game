@@ -4,7 +4,6 @@ import { AppContext } from "../contexts/AppContext";
 import { Card } from "../models/Card";
 import { StyledCard } from "./card/StyledCard";
 import { CardInner } from "./card/CardInner";
-import { Heading } from "./layout/Heading";
 import { useTransition } from "@react-spring/web";
 
 const CardDetail = ({ card, style }: { card: Card; style: any }) => (
@@ -36,7 +35,6 @@ export const Details = () => {
 
   return (
     <DetailsShell>
-      <Heading>{"Details"}</Heading>
       <div style={{ position: "relative", flexGrow: 1 }}>
         {transition(
           (styles, card) => card && <CardDetail card={card} style={styles} />
