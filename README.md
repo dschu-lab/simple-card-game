@@ -38,14 +38,15 @@ npm run start # Starts the development server on localhost:3000
 
 Use `npm run [COMMAND]` to execute available scripts.
 
-| Command    | Description                     |
-| ---------- | ------------------------------- |
-| `start`    | _Starts the development server_ |
-| `build`    | _Build the app for production_  |
-| `test`     | _Launches the test runner_      |
-| `coverage` | _Analyzes test coverage_        |
-| `lint`     | _Checks for linting errors_     |
-| `eject`    | _Ejects from react-scripts_     |
+| Command     | Description                                                           |
+| ----------- | --------------------------------------------------------------------- |
+| `start`     | _Starts the development server_                                       |
+| `build`     | _Build the app for production_                                        |
+| `postbuild` | _Runs automatically after the build. Creates a 200.html for surge.sh_ |
+| `test`      | _Launches the test runner_                                            |
+| `coverage`  | _Analyzes test coverage_                                              |
+| `lint`      | _Checks for linting errors_                                           |
+| `eject`     | _Ejects from react-scripts_                                           |
 
 ## Backend
 
