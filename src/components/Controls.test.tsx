@@ -52,11 +52,12 @@ describe("Controls", () => {
     );
     const sortAsc = screen.getByText(/Sort Asc/i);
     const sortDesc = screen.getByText(/Sort Desc/i);
-    const submitButton = screen.getByText(/Submit/i);
+    const submitButton = screen.getByRole("button", { name: "Submit" });
 
     expect(sortAsc).toBeInTheDocument();
     expect(sortDesc).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
+    expect(submitButton).toBeDisabled();
   });
 
   it("reacts on click on sort asc", () => {
@@ -97,8 +98,10 @@ describe("Controls", () => {
         </AppContext.Provider>
       </ThemeProvider>
     );
+    const submitButton = screen.getByRole("button", { name: "Submit" });
+    expect(submitButton).toBeEnabled();
 
-    fireEvent.click(screen.getByText(/Submit/));
+    fireEvent.click(submitButton);
     expect(submitSelectedCard).toHaveBeenCalledTimes(1);
   });
 });
