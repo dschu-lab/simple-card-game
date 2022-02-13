@@ -26,8 +26,6 @@ export const ErrorOverlay = () => {
     leave: { opacity: 0 },
   });
 
-  console.log(requests.fetching);
-
   return transition(
     (styles, item) =>
       item && (
