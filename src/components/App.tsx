@@ -5,7 +5,7 @@ import { Controls } from "./Controls";
 import { Details } from "./Details";
 import { Overview } from "./Overview";
 import { AppContext, AppContextProvider } from "../contexts/AppContext";
-import { ErrorMessageDisplay } from "./ErrorMessageDisplay";
+import { ErrorOverlay } from "./ErrorOverlay";
 import { theme } from "../style/theme";
 import { GlobalStyle } from "./GlobalStyle";
 import { Heading } from "./layout/Heading";
@@ -35,7 +35,8 @@ const AppShell = ({ children }: { children?: ReactNode }) => {
   const { cards, requests } = useContext(AppContext);
 
   const transitions = useTransition(
-    requests.fetching.isActive || cards.length === 0,
+    requests.fetching.isActive ||
+      (!requests.fetching.hasErrored && cards.length === 0),
     {
       from: { opacity: 0 },
       enter: { opacity: 1 },
@@ -61,7 +62,7 @@ const App = () => {
       <ToastMessageContextProvider>
         <AppContextProvider>
           <ToastMessageDisplay />
-          <ErrorMessageDisplay />
+          <ErrorOverlay />
           <AppShell>
             <Details />
             <Controls />
