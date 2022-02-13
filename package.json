@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^7.0.2",
     "@types/styled-components": "^5.1.22",
     "jest-styled-components": "^7.0.8"
   }
