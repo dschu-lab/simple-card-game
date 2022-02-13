@@ -59,4 +59,4 @@ The backend was mocked using [Mocko](http://mocko.dev).
 
 ## Deployment
 
-The deployment is automated using Github Actions and pushes the production build automatically pushed to [surge.sh](https://surge.sh/).
+The deployment is automated using Github Actions and pushes the production build automatically to [surge.sh](https://surge.sh/).
