@@ -16,7 +16,7 @@ import { Heading } from "./layout/Heading";
 
 const ToastMessagesShell = styled.div`
   box-sizing: border-box;
-  align-items: end;
+  align-items: flex-end;
   display: flex;
   flex-direction: column-reverse;
   padding: ${({ theme }) => theme.spacing.large};
@@ -25,7 +25,7 @@ const ToastMessagesShell = styled.div`
   pointer-events: none;
   position: absolute;
   width: 100vw;
-  z-index: ${({ theme }) => theme.layer.super};
+  z-index: ${({ theme }) => theme.layer.overlay + 1};
 `;
 
 const StyledToast = styled(animated.div)`
@@ -48,7 +48,7 @@ const IconHolder = styled.div<IconHolderProps>`
   background: ${({ theme, $swatch = "ice" }) => swatchGradient(theme, $swatch)};
   align-items: center;
   display: flex;
-  height: 90px;
+  height: 100%;
   justify-content: center;
   width: 90px;
 `;
@@ -113,8 +113,12 @@ const Toast = ({ message, style }: { message: ToastMessage; style: any }) => {
         <FontAwesomeIcon icon={icon} />
       </IconHolder>
       <ToastInner>
-        <Heading as="h4">{message.title}</Heading>
-        <Heading as="h5">{message.description}</Heading>
+        <Heading as="h4" truncate={false}>
+          {message.title}
+        </Heading>
+        <Heading as="h5" truncate={false}>
+          {message.description}
+        </Heading>
       </ToastInner>
       <CloseButton onClick={() => removeMessage(message.id)} />
     </StyledToast>
@@ -127,7 +131,7 @@ export const ToastMessageDisplay = () => {
   const transitions = useTransition(messages, {
     keys: (message) => message.id,
     from: { opacity: 0, height: 0 },
-    enter: { opacity: 1, height: 90 },
+    enter: { opacity: 1, height: 100 },
     leave: { opacity: 0, height: 0 },
   });
 
