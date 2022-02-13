@@ -23,11 +23,9 @@
 
 [Open the live version](https://dschu-simple-card-game.surge.sh)
 
-## How to start local development
+## Quick Overview
 
 This project was bootstrapped using the TypeScript template of the [Create React App](https://github.com/facebook/create-react-app).
-
-## Quick Overview
 
 ```bash
 npm i # Install dependencies
