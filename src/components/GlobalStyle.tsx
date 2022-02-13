@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
 
   body {
     min-height:100%;
-    background-color: #17141f;
+    background-color: ${({ theme }) => theme.bgColor};
     color: white;
   }
 `;
