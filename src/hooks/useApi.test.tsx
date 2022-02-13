@@ -24,8 +24,7 @@ describe("useApi", () => {
   });
 
   it("should fetch cards", async () => {
-    const selectedCardId = null;
-    const { result } = renderHook(() => useApi({ selectedCardId }));
+    const { result } = renderHook(() => useApi());
 
     await waitFor(async () => {
       expect(result.current.fetchingState.isActive).toBeFalsy();
@@ -35,14 +34,15 @@ describe("useApi", () => {
   });
 
   it("should update a card", async () => {
-    const { result } = renderHook(() => useApi({ selectedCardId: "TEST-2" }));
+    const card = new Card("TEST-1", "John", "Doe", 1);
+    const { result } = renderHook(() => useApi());
 
     await waitFor(async () => {
       expect(result.current.fetchingState.isActive).toBeFalsy();
     });
 
     act(() => {
-      result.current.submitSelectedCard();
+      result.current.updateCard(card.id, card);
     });
 
     await waitFor(async () => {

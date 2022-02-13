@@ -5,11 +5,7 @@ import { ApiClient } from "../network/ApiClient";
 import { RequestState, defaultRequestState } from "../models/RequestState";
 import { ToastMessageContext } from "../contexts/ToastMessageContext";
 
-export const useApi = ({
-  selectedCardId,
-}: {
-  selectedCardId: string | null;
-}) => {
+export const useApi = () => {
   const apiClient = useMemo(() => new ApiClient(), []);
 
   const [cards, setCards] = useState<Card[]>([]);
@@ -22,45 +18,42 @@ export const useApi = ({
 
   const { addMessage } = useContext(ToastMessageContext);
 
-  const submitSelectedCard = async () => {
+  const updateCard = async (cardId: string, card: Partial<Card>) => {
     if (updatingState.isActive) {
       return;
     }
 
-    const card = cards.find((card) => card.id === selectedCardId);
-    if (card) {
-      try {
-        // Set update flag
-        setUpdatingState((state) => ({ ...state, isActive: true }));
+    try {
+      // Set update flag
+      setUpdatingState((state) => ({ ...state, isActive: true }));
 
-        // Send data to api
-        await apiClient.updateCard(card.id, card);
+      // Send data to api
+      await apiClient.updateCard(cardId, card);
 
-        // Update the flags
-        setUpdatingState({
-          isActive: false,
-          hasErrored: false,
-          errorMessage: "",
-        });
+      // Update the flags
+      setUpdatingState({
+        isActive: false,
+        hasErrored: false,
+        errorMessage: "",
+      });
 
-        // Create toast notification
-        addMessage("Good work", "Player card has been updated!", "success");
-      } catch (e) {
-        let errorMessage = "";
-        if (e instanceof Error) {
-          errorMessage = e.message;
-        }
-
-        // Update the flags
-        setUpdatingState({
-          isActive: false,
-          hasErrored: true,
-          errorMessage,
-        });
-
-        // Create toast notification
-        addMessage("Uh oh", errorMessage, "error");
+      // Create toast notification
+      addMessage("Good work", "Player card has been updated!", "success");
+    } catch (e) {
+      let errorMessage = "";
+      if (e instanceof Error) {
+        errorMessage = e.message;
       }
+
+      // Update the flags
+      setUpdatingState({
+        isActive: false,
+        hasErrored: true,
+        errorMessage,
+      });
+
+      // Create toast notification
+      addMessage("Uh oh", errorMessage, "error");
     }
   };
 
@@ -117,5 +110,10 @@ export const useApi = ({
     fetchingState.hasErrored,
   ]);
 
-  return { cards, fetchingState, updatingState, submitSelectedCard };
+  return {
+    cards,
+    fetchingState,
+    updatingState,
+    updateCard,
+  };
 };

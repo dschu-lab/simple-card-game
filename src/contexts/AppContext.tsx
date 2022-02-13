@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { Card } from "../models/Card";
 import { RequestState, defaultRequestState } from "../models/RequestState";
 import { useApi } from "../hooks/useApi";
@@ -46,9 +46,15 @@ export const AppContextProvider = ({
 }) => {
   const [order, setOrder] = useState<SortOrder>("none");
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
-  const { cards, fetchingState, updatingState, submitSelectedCard } = useApi({
-    selectedCardId,
-  });
+  const { cards, fetchingState, updatingState, updateCard } = useApi();
+
+  const submitSelectedCard = useCallback(() => {
+    const card = cards.find((card) => card.id === selectedCardId);
+
+    if (selectedCardId && card) {
+      updateCard(selectedCardId, card);
+    }
+  }, [cards, selectedCardId, updateCard]);
 
   return (
     <div className="App">
