@@ -103,10 +103,14 @@ export const useApi = ({
           hasErrored: true,
           errorMessage,
         });
+
+        // Create toast notification
+        addMessage("Uh oh", errorMessage, "error");
       }
     };
     fetchData();
   }, [
+    addMessage,
     apiClient,
     fetchingState.isActive,
     didInitialFetch,
