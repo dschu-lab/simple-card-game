@@ -29,6 +29,7 @@ const StyledHeading = styled.h1<HeadingProps>`
   font-weight: ${({ theme, as }) => (as ? fontWeightMap[as] : undefined)};
   white-space: pre-line;
   text-align: ${({ textAlign = "left" }) => textAlign};
+  line-height: 1.5em;
 
   ${({ truncate = true }) =>
     truncate &&
